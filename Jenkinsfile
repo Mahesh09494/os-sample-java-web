@@ -15,7 +15,7 @@ pipeline {
         }
          stage('Deploy') {
             steps {
-		sh 'cp . .
+		sh 'cp os-sample-java-web/targrt/*.war c:/programfiles/tomcat/webapp/'
         }
     }
     }
