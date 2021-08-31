@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-               sh 'url:https://github.com/Mahesh09494/os-sample-java-web.git, branch:/master credentialsid:admin'
+               sh 'url:https://github.com/Mahesh09494/os-sample-java-web.git, branch:/master'
 
   }
         }
