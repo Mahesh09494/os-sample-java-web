@@ -1,30 +1,22 @@
 pipeline {
-  agent any
-  stages {
-    stage('checkout') {
-      steps {
-        git(url: 'https://github.com/Ajayvarma8142/os-sample-java-web.git', branch: 'master')
-      }
-    }
-    stage('build') {
-      steps {
-        bat 'mvn install'
-      }
-    }
-    stage('SonarQube') {
-      steps {
-        bat 'mvn sonar:sonar'
-      }
-    }
-    stage('unit-test') {
-      steps {
-        bat 'mvn test'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        bat 'runapp.bat'
-      }
-    }
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Mahesh09494/os-sample-java-web.git']]])
+
   }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+         stage('Deploy') {
+            steps {
+		sh 'cp os-sample-java-web/target/*.war c:/programfiles/tomcat/webapp/'
+        }
+    }
+    }
 }
